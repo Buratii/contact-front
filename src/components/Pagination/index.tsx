@@ -54,7 +54,7 @@ export function Pagination({
         <strong>8</strong> - <strong>10</strong> de <strong>100</strong>
       </Box>
       <HStack spacing="2">
-        {currentPage > 2 + siblingsCount && (
+        {currentPage > 1 + siblingsCount && (
           <PaginationItem onPageChange={onPageChange} number={1} />
         )}
 

@@ -43,6 +43,6 @@ export async function deleteContact(id: string): Promise<void> {
 export function useContacts(page: number, options: UseQueryOptions) {
   return useQuery(["users", page], () => getContacts(page), {
     initialData: options.initialData,
-    staleTime: 1000 * 20,
+    staleTime: 1000 * 5,
   });
 }
