@@ -11,6 +11,7 @@ export async function getContacts(page: number): Promise<GetUsersResponse> {
   const { data } = await api.get("users", {
     params: {
       page,
+      limit: 5,
     },
   });
 

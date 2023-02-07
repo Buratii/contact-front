@@ -8,7 +8,7 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-const siblinsCount = 1;
+const siblingsCount = 1;
 
 function generatePagesArray(from: number, to: number) {
   return [...new Array(to - from)]
@@ -20,22 +20,25 @@ function generatePagesArray(from: number, to: number) {
 
 export function Pagination({
   totalCount,
-  limitPerPage = 3,
+  limitPerPage = 5,
   currentPage = 1,
   onPageChange,
 }: PaginationProps) {
-  const lastPage = Math.floor(totalCount / limitPerPage);
+  const lastPage = Math.ceil(totalCount / limitPerPage);
+  console.log("lastPage", lastPage);
+  console.log("totalCount", totalCount);
+  console.log("limitPerPage", limitPerPage);
 
   const previousPages =
     currentPage > 1
-      ? generatePagesArray(currentPage - 1 - siblinsCount, currentPage - 1)
+      ? generatePagesArray(currentPage - 1 - siblingsCount, currentPage - 1)
       : [];
 
   const nextPages =
     currentPage < lastPage
       ? generatePagesArray(
           currentPage,
-          Math.min(currentPage + siblinsCount, lastPage)
+          Math.min(currentPage + siblingsCount, lastPage)
         )
       : [];
 
@@ -51,14 +54,14 @@ export function Pagination({
         <strong>8</strong> - <strong>10</strong> de <strong>100</strong>
       </Box>
       <HStack spacing="2">
-        {currentPage > 1 + siblinsCount && (
+        {currentPage > 2 + siblingsCount && (
           <PaginationItem onPageChange={onPageChange} number={1} />
         )}
 
         {previousPages.length > 0 &&
           previousPages.map((page) => (
             <>
-              {currentPage > 2 + siblinsCount && (
+              {currentPage > 2 + siblingsCount && (
                 <Text key={page} color="gray.300" width="6" textAlign="center">
                   ...
                 </Text>
@@ -86,9 +89,9 @@ export function Pagination({
             />
           ))}
 
-        {currentPage + siblinsCount < lastPage && (
+        {currentPage + siblingsCount < lastPage && (
           <>
-            {currentPage + 1 + siblinsCount < lastPage && (
+            {currentPage + 1 + siblingsCount < lastPage && (
               <Text color="gray.300" width="6" textAlign="center">
                 ...
               </Text>
